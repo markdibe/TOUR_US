@@ -1,4 +1,5 @@
 
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TOUR_US.BO;
+using TOUR_US.BO.Service;
 using TOUR_US.DAL;
 using TOUR_US.DAL.Models;
 using TOUR_US.DAL.Repos;
@@ -45,7 +48,8 @@ namespace IdentityAPI
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options => {
+            }).AddJwtBearer(options =>
+            {
 
                 options.SaveToken = true;
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
@@ -56,7 +60,7 @@ namespace IdentityAPI
 
                     //Audience is the client 
                     ValidateAudience = true,
-                    ValidAudience="https://localhost:44330",
+                    ValidAudience = "https://localhost:44330",
 
                     ValidateIssuerSigningKey = true,
                     //Our Secret Key
@@ -67,7 +71,15 @@ namespace IdentityAPI
                 };
             });
 
-            services.AddScoped<IGenericRepos<Category>, GenericRepos<Category>>();
+            //services.AddScoped<IGenericRepos<Category>, GenericRepos<Category>>();
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            //services.AddScoped<QueryFilterBO<Category>>();
+
+            new ServiceInjector(services).Render();
+            
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

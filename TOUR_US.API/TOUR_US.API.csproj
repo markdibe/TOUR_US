@@ -16,7 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TOUR_US.BO\TOUR_US.BO.csproj" />
     <ProjectReference Include="..\TOUR_US.MVC\TOUR_US.MVC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Categories\" />
+    <Folder Include="wwwroot\Images\Activities\" />
   </ItemGroup>
 
 </Project>

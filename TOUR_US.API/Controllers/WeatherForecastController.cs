@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Threading.Tasks;
+using TOUR_US.BO.Service;
+using TOUR_US.BO.ViewModels;
 using TOUR_US.DAL.Models;
 using TOUR_US.DAL.Services;
 
@@ -17,8 +19,9 @@ namespace IdentityAPI.Controllers
     public class WeatherForecastController : ControllerBase
     {
         private readonly IGenericRepos<Category> _cat;
+        private readonly QueryFilterBO<Category> _query;
 
-  
+
 
 
         private static readonly string[] Summaries = new[]
@@ -28,16 +31,26 @@ namespace IdentityAPI.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IGenericRepos<Category> cat)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IGenericRepos<Category> cat, QueryFilterBO<Category> query)
         {
             _logger = logger;
             _cat = cat;
+            _query = query;
         }
 
         [HttpGet]
-        public IEnumerable<Category> Get()
+        public IEnumerable<Category> Get([FromQuery] QueryFilter queryFilter)
         {
-            var result = _cat.GetAll().Where("Title== @0","Test");
+            //var result = _cat.GetAll().Where("Title== @0","Test");
+            //new TOUR_US.BO.ViewModels.QueryFilter()
+            //{
+            //    OrderByDescending = true,
+            //    OrderProperty = "Title",
+            //    PropertyNames = new string[] { "Title", "Header" },
+            //    PropertyValues = new string[] { "Siz", "xxx" },
+            //    Condition = "OR"
+            //}
+            var result = _query.Filter(queryFilter);
             return result;
             //var rng = new Random();
             //return Enumerable.Range(1, 5).Select(index => new WeatherForecast

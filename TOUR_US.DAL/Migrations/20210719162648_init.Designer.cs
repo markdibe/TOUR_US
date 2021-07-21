@@ -10,7 +10,7 @@ using TOUR_US.DAL;
 namespace TOUR_US.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210716190352_init")]
+    [Migration("20210719162648_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

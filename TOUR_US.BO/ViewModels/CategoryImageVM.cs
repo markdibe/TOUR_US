@@ -5,12 +5,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TOUR_US.BO.Attributes;
 
 namespace TOUR_US.BO.ViewModels
 {
-    public class ActivityImageVM
+    public class CategoryImageVM
     {
-        public int Id { get; set; }
+        public int CategoryImageId { get; set; }
 
         [Required]
         [DataType(DataType.ImageUrl)]
@@ -22,8 +23,10 @@ namespace TOUR_US.BO.ViewModels
         public string ImageTag { get; set; }
 
         [Required]
-        public int ActivityId { get; set; }
+        public int CategoryId { get; set; }
 
+        [MaxFileSize(5 * 1024 * 1024)]
+        [AllowedExtensionFile(".jpg,.bmp,.PNG,.EPS,.gif,.TIFF,.tif,.jfif")]
         public IFormFile FormFile { get; set; }
     }
 }

@@ -49,11 +49,12 @@ namespace TOUR_US.DAL.Repos
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public async Task Update(T entity)
+        public async Task<T> Update(T entity)
         {
             //_context.Set<T>().Update(entity);
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
+            return entity;
         }
     }
 }

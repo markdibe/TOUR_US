@@ -25,4 +25,8 @@
     <ProjectReference Include="..\TOUR_US.DAL\TOUR_US.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Categories\" />
+  </ItemGroup>
+
 </Project>

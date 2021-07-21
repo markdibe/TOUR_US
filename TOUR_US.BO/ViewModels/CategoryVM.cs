@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TOUR_US.DAL.Models
+namespace TOUR_US.BO.ViewModels
 {
-    public class Category
+    public class CategoryVM
     {
-        [Key]
+        
         public int Id { get; set; }
 
         [Required]
@@ -27,20 +27,12 @@ namespace TOUR_US.DAL.Models
         [StringLength(2000)]
         public string Description { get; set; }
 
-
-
-        [ForeignKey(nameof(ApplicationUser))]
         public string UserId { get; set; }
 
-        [DataType(DataType.DateTime)]
 
-        public DateTime CreatedDate { get; set; }
-        [Required]
-        public ApplicationUser CreatedBy { get; set; }
+        public IFormFileCollection FormFiles { get; set; }
 
 
-        public virtual ICollection<CategoryImage> CategoryImages { get; set; }
-
-
+        public virtual ICollection<CategoryImageVM> CategoryImageVMs { get; set; }
     }
 }
